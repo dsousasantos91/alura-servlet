@@ -1,40 +1,40 @@
-package br.com.alura.gerenciador.servlet;
+package br.com.alura.gerenciador.servlet.unused;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.alura.gerenciador.model.Banco;
+import br.com.alura.gerenciador.model.Empresa;
+
 /**
- * Servlet implementation class NovaEmpresaServlet
+ * Servlet implementation class AlterarEmpresaServlet
  */
-@WebServlet("/novaEmpresa")
-public class NovaEmpresaServlet extends HttpServlet {
+//@WebServlet("/alterarEmpresa")
+public class AlterarEmpresaServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
+	public AlterarEmpresaServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		System.out.println("Cadastrando nova empresa");
+
+		System.out.println("Alterando Empresa");
 		
 		String nomeEmpresa = request.getParameter("nome");
 		String paramDataEmpresa = request.getParameter("data");
-//		PrintWriter out = response.getWriter();
-//		out.println("<html>");
-//		out.println("<body>");
-//		out.println("Empresa " + nomeEmpresa + " cadastrada com sucesso!");
-//		out.println("</body>");
-//		out.println("</html>");
-		
-		Banco banco = new Banco();
+		String paramId = request.getParameter("id");
+		Integer id = Integer.valueOf(paramId);
 		
 		Date dataAbertura = null;
 		try {
@@ -43,18 +43,15 @@ public class NovaEmpresaServlet extends HttpServlet {
 		} catch (ParseException e) {
 			throw new ServletException(e);
 		}
-		Empresa empresa = new Empresa();
+		
+		System.out.println(id);
+
+		Banco banco = new Banco();
+		Empresa empresa = banco.buscarEmpresaPorId(id);
 		empresa.setNome(nomeEmpresa);
 		empresa.setDataAbertura(dataAbertura);
 		
-		
-		banco.adicionar(empresa);
-		
 		response.sendRedirect("listaEmpresas");
-		
-//		RequestDispatcher rd = request.getRequestDispatcher("/listaEmpresas");
-//		request.setAttribute("empresa", empresa.getNome());
-//		rd.forward(request, response);
 	}
 
 }

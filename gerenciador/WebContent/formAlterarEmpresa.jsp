@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<c:url value="/alterarEmpresa" var="linkNovaEmpresa" />    
+<c:url value="/entrada" var="linkEntradaServlet" />    
 
 <!DOCTYPE html>
 <html>
@@ -13,10 +13,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="${linkNovaEmpresa }" method="post">
+	<form action="${linkEntradaServlet }" method="post">
 		Nome: <input type="text" name="nome" value="${empresa.nome }" />
 		Data abertura: <input type="text" name="data" value="<fmt:formatDate value="${empresa.dataAbertura }" pattern="dd/MM/yyyy" />"/>
 		<input type="hidden" name="id" value="${empresa.id }" />
+		<input type="hidden" name="acao" value="AlteraEmpresa" />
 		<input type="submit" />
 	</form>
 </body>
