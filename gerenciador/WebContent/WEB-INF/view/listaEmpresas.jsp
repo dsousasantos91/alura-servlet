@@ -14,6 +14,8 @@
 </head>
 <body>
 
+	<c:import url="logout-parcial.jsp"/>
+
 	Usuario Logado: ${usuarioLogado.login }
 
 	<br>
